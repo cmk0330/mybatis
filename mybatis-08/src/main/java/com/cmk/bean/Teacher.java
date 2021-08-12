@@ -12,5 +12,6 @@ import java.util.List;
 public class Teacher {
     private int id;
     private String name;
-    private List<Student> students;
+    // 一个老师拥有多个学生
+    private List<Student> student;
 }

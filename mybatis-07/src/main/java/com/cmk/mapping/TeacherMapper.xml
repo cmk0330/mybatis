@@ -3,5 +3,38 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--配置-->
+
 <mapper namespace="com.cmk.dao.TeacherMapper">
+    <!-- 按结果嵌套查询 -->
+    <select id="getTeacherStudent" resultMap="teacherOnStudent">
+        select s.id sid, s.name sname, t.id tid, t.name tname
+        from student s,
+             teacher t
+        where t.id = s.tid
+          and t.id = #{tid}
+    </select>
+
+    <resultMap id="teacherOnStudent" type="Teacher">
+        <result property="id" column="tid"/>
+        <result property="name" column="tname"/>
+
+        <collection property="students" ofType="Student">
+            <result property="id" column="sid"/>
+            <result property="name" column="sname"/>
+            <result property="id" column="tid"/>
+        </collection>
+    </resultMap>
+
+    <!--  -->
+    <select id="getTeacherStudent2" resultMap="teacherOnStudent2">
+        select * from mybatis.teacher where id = #{id}
+    </select>
+    
+    <resultMap id="teacherOnStudent2" type="Teacher">
+        <collection property="students" javaType="ArrayList" ofType="Student" select="getStudentByTeacherId" column="id"/>
+    </resultMap>
+
+    <select id="getStudentByTeacherId" resultType="Student">
+        select * from mybatis.student where tid = #{tid}
+    </select>
 </mapper>

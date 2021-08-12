@@ -24,8 +24,5 @@
             </dataSource>
         </environment>
     </environments>
-    <!-- 绑定接口 -->
-    <mappers>
-        <mapper class="com.cmk.dao.UserMapper"/>
-    </mappers>
+
 </configuration>

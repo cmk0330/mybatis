@@ -6,8 +6,11 @@
 <configuration>
     <!-- 引入外部配置文件 -->
     <properties resource="dp.properties"/>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
     <typeAliases>
-<!--        <typeAlias type="com.com.cmk.bean.User" alias="User"/>-->
+        <!--        <typeAlias type="com.cmk.bean.User" alias="User"/>-->
         <package name="com.cmk.bean"/>
     </typeAliases>
     <environments default="development">
@@ -20,19 +23,12 @@
                 <property name="password" value="${password}"/>
             </dataSource>
         </environment>
-
-
-        <!--        <environment id="development">-->
-        <!--            <transactionManager type="JDBC"/>-->
-        <!--            <dataSource type="POOLED">-->
-        <!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
-        <!--                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;useUnicode=false&amp;characterEncoding=UTF-8"/>-->
-        <!--                <property name="username" value="root"/>-->
-        <!--                <property name="password" value="root"/>-->
-        <!--            </dataSource>-->
-        <!--        </environment>-->
     </environments>
+    <!-- 绑定接口 -->
     <mappers>
-        <mapper resource="com/com.cmk/mapping/UserMapper.xml"/>
+        <mapper resource="com/cmk/mapping/TeacherMapper.xml"/>
+<!--        <mapper class="cmk.dao.StudentMapper"/>-->
+        <mapper resource="com/cmk/mapping/StudentMapper.xml"/>
+
     </mappers>
 </configuration>

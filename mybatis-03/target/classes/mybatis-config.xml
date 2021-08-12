@@ -36,6 +36,6 @@
         <!--        </environment>-->
     </environments>
     <mappers>
-        <mapper resource="com/cmk/mapping/UserMapper.xml"/>
+        <mapper resource="com/com.cmk/mapping/UserMapper.xml"/>
     </mappers>
 </configuration>

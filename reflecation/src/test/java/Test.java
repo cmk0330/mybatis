@@ -19,10 +19,10 @@ public class Test {
         Class<Student> c2 = Student.class;
         Class<? extends Person> c3 = person.getClass();
         Class superclass = c1.getSuperclass();
-        System.out.println(c1);
-        System.out.println(c3);
-        System.out.println(c2);
-        System.out.println(superclass);
+//        System.out.println(c1);
+//        System.out.println(c3);
+//        System.out.println(c2);
+//        System.out.println(superclass);
 
         Field[] fields = c1.getFields();
         for(Field field : fields) {
@@ -31,9 +31,14 @@ public class Test {
         Class<?> c4 = Class.forName("com.cmk.User");
         Constructor<?> constructor = c4.getConstructor(String.class, int.class, int.class);
         User user = (User) constructor.newInstance("张无忌", 24, 12);
-        System.out.println(user);
-        Method setName = c4.getDeclaredMethod("setName", String.class);
-        setName.invoke(user, "铁男");
-        System.out.println(user.getName());
+        System.out.println(user.hashCode());
+        Class<?> c5 = Class.forName("com.cmk.User");
+        Constructor<?> constructor1 = c5.getConstructor(String.class, int.class, int.class);
+        User user1 = (User) constructor1.newInstance("张无忌", 24, 12);
+        System.out.println(user1.hashCode());
+
+//        Method setName = c4.getDeclaredMethod("setName", String.class);
+//        setName.invoke(user, "铁男");
+//        System.out.println(user.getName());
     }
 }

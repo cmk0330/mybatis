@@ -17,7 +17,8 @@
         <module>mybatis-04</module>
         <module>mybatis-06</module>
         <module>mybatis-07</module>
-        <module>mybatis-05</module>
+        <module>mybatis-08</module>
+        <module>thread-test</module>
     </modules>
 
     <properties>
