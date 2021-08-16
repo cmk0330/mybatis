@@ -1,5 +1,7 @@
+import java.util.concurrent.locks.ReentrantLock;
+
 public class ThreadTest {
-    private  static int num;
+    private static int num;
     private static boolean flag = false;
 
     public static void main(String[] args) {
@@ -11,6 +13,8 @@ public class ThreadTest {
      * 原子性测试
      */
     public static void atom() {
+
+        ReentrantLock reentrantLock = new ReentrantLock();
 
         Thread thread1 = new Thread(() -> {
             for (int i = 0; i < 10000000; i++) {
@@ -48,17 +52,24 @@ public class ThreadTest {
      * 可见性
      */
     private static void visibility() {
+
         Thread thread1 = new Thread(() -> {
-            while (num != 20) {
-                System.out.println(Thread.currentThread().getName() + "--->" );
+            for (; ; ) {
+                if (20 == num) {
+                    System.out.println(Thread.currentThread().getName() + "--->");
+                }
             }
+//            while (num == 20) {
+//                System.out.println(Thread.currentThread().getName() + "--->" );
+//            }
         });
+
         Thread thread2 = new Thread(() -> {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 500; i++) {
                 num++;
                 System.out.println(Thread.currentThread().getName() + "--->" + num);
             }
-        });;
+        });
 
         thread1.setName("t1");
         thread2.setName("t2");
