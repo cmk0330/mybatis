@@ -5,7 +5,8 @@ public class ThreadTest {
     private static boolean flag = false;
 
     public static void main(String[] args) {
-        visibility();
+//        visibility();
+        lockTest();
 
     }
 
@@ -79,6 +80,22 @@ public class ThreadTest {
 
     private static int compute() {
         return num++;
+    }
+
+    /**
+     * 锁测试
+     */
+    private static void lockTest() {
+        Thread thread1 = new Thread(() -> {
+            MyThreadLock.lock();
+            System.out.println("thread1使用锁中");
+        });
+
+        Thread thread2 = new Thread(() -> {
+            MyThreadLock.lock();
+            System.out.println("thread2使用锁中");
+        });
+
     }
 
 }
