@@ -3,6 +3,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ThreadTest {
     private static int num;
     private static boolean flag = false;
+    private static String SSSSSS = ";;;;";
 
     public static void main(String[] args) {
 //        visibility();

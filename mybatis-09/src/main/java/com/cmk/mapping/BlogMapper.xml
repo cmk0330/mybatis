@@ -4,12 +4,44 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--配置-->
 <mapper namespace="com.cmk.dao.BlogMapping">
+
+    <sql id="if-title-author">
+        <if test="title != null">
+            title = #{title},
+        </if>
+        <if test="author != null">
+            author = #{author}
+        </if>
+    </sql>
     <insert id="addBlog" parameterType="blog">
         insert into mybatis.blog (id, title, author, create_time, views)
         values (#{id}, #{title}, #{author}, #{createTime}, #{views})
     </insert>
 
     <select id="queryBlog" parameterType="blog" resultType="blog">
-        select *from mybatis.
+        select *from mybatis.blog
+        <where>
+            <include refid="if-title-author"></include>
+        </where>
+    </select>
+
+    <update id="updateSet" parameterType="map">
+        update mybatis.blog
+        <set>
+            <include refid="if-title-author"></include>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--
+        select * from mybatis.blog where 1=1 and (id = 1 or id = 2 or id = 3)
+    -->
+    <select id="queryBlogForeach" parameterType="map" resultType="blog">
+        select * from mybatis.blog
+        <where>
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                id=#{id}
+            </foreach>
+        </where>
     </select>
 </mapper>
